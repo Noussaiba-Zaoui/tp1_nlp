@@ -1,0 +1,86 @@
+version: "3.1"
+
+intents:
+  - greet
+  - thankful
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - book_flight
+  - provide_flight_Departing
+  - provide_flight_arriving
+  - provide_flight_Date
+
+responses:
+  utter_greet:
+    - text: "Hey! {name} How are you?"
+      buttons:
+        - title: "great"
+          payload: "/mood_great"
+        - title: "bad"
+          payload: "/mood_sad"
+
+  utter_res_thank:
+    - text: "Happy it helped you"
+
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+    - text: "Did that help you?"
+
+  utter_happy:
+    - text: "Great, carry on!"
+
+  utter_goodbye:
+    - text: "Bye"
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+
+  utter_ask_departure_location:
+    - text: "Sure! Could you please tell me your departure location?"
+  utter_ask_destination_location:
+    - text: "Great! Where are you headed to?"
+  utter_ask_departure_date:
+    - text: "Wonderful! When do you plan to depart?"
+  utter_confirmation_prompt:
+    - text: "You want to book a flight from {from_location} to {to_location} on {departure_date}. Is that correct?"
+  utter_booking_confirmation:
+    - text: "Your flight from {from_location} to {to_location} on {departure_date} has been booked successfully."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+entities:
+  - name
+  - from_location
+  - to_location
+  - departure_date
+
+slots:
+  name:
+    type: any
+    mappings:
+      - type: from_entity
+        entity: name
+  from_location:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: from_location
+  to_location:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: to_location
+  departure_date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: departure_date

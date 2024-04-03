@@ -1,0 +1,61 @@
+version: "3.1"
+
+stories:
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+
+  - story: sad path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy
+
+  - story: sad path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_goodbye
+
+  - story: Book flight path
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+      - intent: book_flight
+
+      - action: utter_ask_departure_location
+      - intent: provide_flight_Departing
+      - slot_was_set:
+          - from_location: "New York"
+
+      - action: utter_ask_destination_location
+      - intent: provide_flight_arriving
+      - slot_was_set:
+          - to_location: "Paris"
+
+      - action: utter_ask_departure_date
+      - intent: provide_flight_Date
+      - slot_was_set:
+          - departure_date: "April 10th"
+
+      - action: utter_confirmation_prompt
+      - intent: affirm
+      - action: utter_booking_confirmation
+
+      - intent: thankful
+      - action: utter_res_thank
+
+      - intent: goodbye
+      - action: utter_goodbye
